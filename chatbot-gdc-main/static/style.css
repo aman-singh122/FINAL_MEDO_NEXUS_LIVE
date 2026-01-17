@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  height: 100vh;
+}
+
+/* Light mode */
+body.light {
+  background: #f7f9fc;
+  color: #0f172a;
+}
+
+/* Dark mode */
+body.dark {
+  background: #0b1220;
+  color: #e5e7eb;
+}
+
+/* Layout */
+.layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: #eef3ff;
+  padding: 20px;
+  border-right: 1px solid #dbeafe;
+}
+
+body.dark .sidebar {
+  background: #020617;
+  border-right: 1px solid #1e293b;
+}
+
+.sidebar h1 {
+  margin: 0 0 20px;
+}
+
+.new-chat {
+  width: 100%;
+  padding: 10px;
+  background: #2563eb;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.toggle {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+/* Chat area */
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.chat-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #22c55e;
+  border-radius: 50%;
+}
+
+/* Messages */
+.messages {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  background: #f9fbff;
+}
+
+body.dark .messages {
+  background: #020617;
+}
+
+/* Chat bubbles */
+.bubble {
+  max-width: 75%;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  border-radius: 14px;
+  line-height: 1.6;
+}
+
+.bubble.bot {
+  background: #eef2ff;
+  border: 1px solid #dbeafe;
+}
+
+body.dark .bubble.bot {
+  background: #1e293b;
+  border: 1px solid #334155;
+}
+
+.bubble.user {
+  background: #2563eb;
+  color: white;
+  margin-left: auto;
+}
+
+/* Typing */
+.typing {
+  font-style: italic;
+  opacity: 0.7;
+}
+
+/* Input */
+.input-area {
+  padding: 16px;
+  display: flex;
+  gap: 12px;
+  border-top: 1px solid #e5e7eb;
+}
+
+body.dark .input-area {
+  border-top: 1px solid #1e293b;
+}
+
+.input-area input {
+  flex: 1;
+  padding: 14px;
+  border-radius: 8px;
+  border: 1px solid #c7d2fe;
+  font-size: 15px;
+}
+
+.input-area button {
+  padding: 14px 20px;
+  background: #2563eb;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}

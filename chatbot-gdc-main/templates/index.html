@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediSarthi | AI Medical Assistant</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-body: #f8fafc;
+            --bg-sidebar: #ffffff;
+            --bg-chat: #ffffff;
+            --bg-input: #ffffff;
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent-primary: #2563eb;
+            --accent-hover: #1d4ed8;
+            --bubble-user: #2563eb;
+            --bubble-bot: #f1f5f9;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --font-main: 'Inter', system-ui, sans-serif;
+        }
+
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-sidebar: #1e293b;
+            --bg-chat: #0f172a;
+            --bg-input: #1e293b;
+            --border-color: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-primary: #3b82f6;
+            --accent-hover: #60a5fa;
+            --bubble-user: #3b82f6;
+            --bubble-bot: #1e293b;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: var(--font-main);
+            background: var(--bg-body);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .app-container { display: flex; height: 100vh; }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 280px;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border-color);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .btn-new-chat {
+            background: var(--accent-primary);
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .history-list {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .sidebar-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
+        }
+
+        /* --- CHAT AREA --- */
+        .chat-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+        }
+
+        .messages-container {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .message-wrapper {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .message-wrapper.user {
+            justify-content: flex-end;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 12px;
+            max-width: 75%;
+            line-height: 1.6;
+        }
+
+        .bubble.bot {
+            background: var(--bubble-bot);
+        }
+
+        .bubble.user {
+            background: var(--bubble-user);
+            color: white;
+        }
+
+        .input-container {
+            border-top: 1px solid var(--border-color);
+            padding: 16px;
+        }
+
+        .input-wrapper {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 14px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            font-size: 15px;
+        }
+
+        .btn-send {
+            background: var(--accent-primary);
+            border: none;
+            color: white;
+            padding: 0 18px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .disclaimer {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <aside class="sidebar">
+        <div class="logo-area">
+            <div class="logo-icon">M</div>
+            <div class="logo-text">MediSarthi</div>
+        </div>
+
+        <button class="btn-new-chat" onclick="location.reload()">New Consultation</button>
+
+        <div class="history-list">
+            <strong>Recent</strong>
+            <p>Symptoms of Flu</p>
+            <p>Diabetes diet</p>
+        </div>
+
+        <div class="sidebar-footer">
+            <span>Dark Mode</span>
+            <input type="checkbox" id="themeToggle">
+        </div>
+    </aside>
+
+    <main class="chat-area">
+        <div class="chat-header">
+            <div class="status-dot"></div>
+            <div>
+                <strong>MediSarthi – Medical Assistant</strong><br>
+                <small>Always consult a doctor</small>
+            </div>
+        </div>
+
+        <div class="messages-container" id="messages">
+            <div class="message-wrapper">
+                <div class="bubble bot">
+                    Hello! 👋 I am <strong>MediSarthi</strong>.<br><br>
+                    I can help explain symptoms, diseases, and treatments using reliable medical information.<br><br>
+                    <strong>How can I help you today?</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-container">
+            <div class="input-wrapper">
+                <input id="userInput" class="chat-input" placeholder="Ask a medical question..." />
+                <button class="btn-send" onclick="sendMessage()">Send</button>
+            </div>
+            <div class="disclaimer">
+                AI-generated information is for assistance only. Not a medical diagnosis.
+            </div>
+        </div>
+    </main>
+
+</div>
+
+<script>
+async function sendMessage() {
+    const input = document.getElementById("userInput");
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    const messages = document.getElementById("messages");
+    messages.innerHTML += `
+        <div class="message-wrapper user">
+            <div class="bubble user">${msg}</div>
+        </div>
+    `;
+    input.value = "";
+
+    const res = await fetch("/ask", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({question: msg})
+    });
+
+    const data = await res.json();
+    messages.innerHTML += `
+        <div class="message-wrapper">
+            <div class="bubble bot">${data.answer}</div>
+        </div>
+    `;
+    messages.scrollTop = messages.scrollHeight;
+}
+</script>
+
+</body>
+</html>
