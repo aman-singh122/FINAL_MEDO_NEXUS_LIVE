@@ -197,3 +197,4 @@ export const getOnlineDoctors = async (req, res) => {
     });
   }
 };
+

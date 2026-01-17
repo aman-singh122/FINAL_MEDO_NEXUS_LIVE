@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import { useNavigate } from "react-router-dom";
 import { getAppointmentById, cancelOpd } from "@/api/opd.api";
 import {
   Calendar,
@@ -119,7 +120,7 @@ const AppointmentDetail = () => {
       fetchDetails(); // Refresh state
     } catch (err: any) {
       toast.error(
-        err?.response?.data?.message || "Server rejected cancellation request."
+        err?.response?.data?.message || "Server rejected cancellation request.",
       );
     } finally {
       setCancelLoading(false);
@@ -228,7 +229,10 @@ const AppointmentDetail = () => {
               {isOnline && ["booked", "confirmed"].includes(status) && (
                 <Button
                   onClick={() =>
-                 window.open(`http://localhost:8080/room/${appointment._id}`, "_blank")
+                    window.open(
+                      `http://localhost:8080/room/${appointment._id}`,
+                      "_blank",
+                    )
                   }
                   className="rounded-full px-8 shadow-lg bg-blue-600 hover:bg-blue-700 animate-pulse"
                 >
@@ -295,8 +299,8 @@ const AppointmentDetail = () => {
                           status === "confirmed"
                             ? "bg-emerald-500"
                             : status === "cancelled"
-                            ? "bg-red-500"
-                            : "bg-amber-500"
+                              ? "bg-red-500"
+                              : "bg-amber-500"
                         }`}
                       >
                         {status}
@@ -338,7 +342,7 @@ const AppointmentDetail = () => {
                         <div className="flex items-center gap-3 font-bold text-slate-700">
                           <Calendar size={18} className="text-blue-500" />
                           {new Date(
-                            appointment.schedule.date
+                            appointment.schedule.date,
                           ).toLocaleDateString()}
                         </div>
                         <div className="flex items-center gap-3 font-bold text-slate-700">
@@ -371,9 +375,20 @@ const AppointmentDetail = () => {
                       </div>
                       <div>
                         <p className="text-xs text-slate-500 mb-1">Queue No.</p>
-                        <p className="text-2xl font-black text-blue-600">
+
+                        <p className="text-2xl font-black text-blue-600 mb-2">
                           #{appointment.token?.tokenNumber || "N/A"}
                         </p>
+
+                        <Button
+                          size="sm"
+                          className="rounded-full px-4 h-8 text-xs font-bold bg-blue-600 hover:bg-blue-700"
+                          onClick={() =>
+                         navigate(`/live-queue/${appointment.hospital?._id}`)
+                          }
+                        >
+                          Track Live Queue
+                        </Button>
                       </div>
                       <div>
                         <p className="text-xs text-slate-500 mb-1">Ref ID</p>

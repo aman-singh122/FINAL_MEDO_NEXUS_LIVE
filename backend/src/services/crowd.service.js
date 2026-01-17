@@ -1,5 +1,5 @@
 export const calculateCrowdLevel = ({ bookedTokens }) => {
-  if (bookedTokens >= 8) {
+  if (bookedTokens >= 10) {
     return {
       level: "HIGH",
       badgeClass: "bg-rose-100 text-rose-700",
@@ -7,6 +7,8 @@ export const calculateCrowdLevel = ({ bookedTokens }) => {
       waitTime: "45+ mins",
     };
   }
+
+
 
   if (bookedTokens >= 5) {
     return {
@@ -16,6 +18,7 @@ export const calculateCrowdLevel = ({ bookedTokens }) => {
       waitTime: "15–30 mins",
     };
   }
+
 
   return {
     level: "LOW",

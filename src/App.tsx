@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import PatientQueue from "@/pages/LiveQueue/PatientQueue";
 
 /* ================= UI PROVIDERS ================= */
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -38,6 +39,7 @@ import UploadReport from "@/hospital/pages/UploadReport";
 
 const App = () => {
   return (
+    <>
     <NotificationProvider>
       <TooltipProvider>
         <Toaster />
@@ -86,6 +88,8 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+
+            
 
             <Route
               path="/records"
@@ -169,6 +173,8 @@ const App = () => {
         </BrowserRouter>
       </TooltipProvider>
     </NotificationProvider>
+
+  </>
   );
 };
 

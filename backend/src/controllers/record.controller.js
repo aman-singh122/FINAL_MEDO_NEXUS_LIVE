@@ -23,6 +23,7 @@ export const createMedicalRecord = async (req, res) => {
       });
     }
 
+    
     const appointment = await Appointment.findById(appointmentId)
       .populate("doctorId")
       .populate("hospitalId");

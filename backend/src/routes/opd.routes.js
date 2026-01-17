@@ -20,7 +20,7 @@ router.get("/my-appointments", authMiddleware, getMyAppointments);
 // Get single appointment detail
 router.get("/appointments/:id", authMiddleware, getAppointmentById);
 
-// ❌ Cancel OPD appointment (NO REFUND)
+//  Cancel OPD appointment (NO REFUND)
 router.patch("/cancel/:id", authMiddleware, cancelOpd);
 
 export default router;
